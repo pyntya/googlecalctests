@@ -21,3 +21,5 @@
 # Maven
 log/
 target/
+
+.idea
