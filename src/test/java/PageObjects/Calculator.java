@@ -104,7 +104,7 @@ public class Calculator extends PageObject {
         answerButton.click();
     }
 
-    public String getAnser() {
+    public String getAnswer() {
         return mainField.getText();
     }
 
