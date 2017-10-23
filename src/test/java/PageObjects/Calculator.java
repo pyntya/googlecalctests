@@ -1,7 +1,6 @@
 package PageObjects;
 
 import net.thucydides.core.pages.PageObject;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,48 +11,63 @@ public class Calculator extends PageObject {
         super(driver);
     }
 
-    @FindBy(xpath = "//div/span[@class=\"cwcot\"]")
-    WebElement mainField;
+    @FindBy(css = "#cwos")
+    WebElement answerField;
 
-    @FindBy(xpath = " //div//span[text()=\"0\"]")
+    @FindBy(css = "#cwbt43 > div > span")
     WebElement zeroButton;
 
-    @FindBy(xpath = " //div//span[text()=\"1\"]")
+    @FindBy(css = "#cwbt33 > div > span")
     WebElement oneButton;
 
-    @FindBy(xpath = " //div//span[text()=\"2\"]")
+    @FindBy(css = "#cwbt34 > div > span")
     WebElement twoButton;
 
-    @FindBy(xpath = " //div//span[text()=\"3\"]")
+    @FindBy(css = "#cwbt35 > div > span")
     WebElement threeButton;
 
-    @FindBy(xpath = " //div//span[text()=\"4\"]")
+    @FindBy(css = "#cwbt23 > div > span")
     WebElement fourButton;
 
-    @FindBy(xpath = " //div//span[text()=\"5\"]")
+    @FindBy(css = "#cwbt24 > div > span")
     WebElement fiveButton;
 
-    @FindBy(xpath = " //div//span[text()=\"6\"]")
+    @FindBy(css = "#cwbt25 > div > span")
     WebElement sixButton;
 
-    @FindBy(xpath = " //div//span[text()=\"7\"]")
+    @FindBy(css = "#cwbt13 > div > span")
     WebElement sevenButton;
 
-    @FindBy(xpath = " //div//span[text()=\"8\"]")
+    @FindBy(css = "#cwbt14 > div > span")
     WebElement eightButton;
 
-    @FindBy(xpath = " //div//span[text()=\"9\"]")
+    @FindBy(css = "#cwbt15 > div > span")
     WebElement nineButton;
 
-    @FindBy(xpath = " //div//span[text()=\"=\"]")
+    @FindBy(css = "#cwbt45 > div > span")
     WebElement answerButton;
 
-    @FindBy(xpath = " //div//span[text()=\"+\"]")
+    @FindBy(css = "#cwbt46 > div > span")
     WebElement plusButton;
 
+    @FindBy(css = "#cwbt36 > div > span")
+    WebElement minusButton;
+
+    @FindBy(css = "#cwbt26 > div > span")
+    WebElement multiplicationButton;
+
+    @FindBy(css = "#cwbt16 > div > span")
+    WebElement divisionButton;
+
+    @FindBy(css = "#cwbt03 > div > span")
+    WebElement leftBracketButton;
+
+    @FindBy(css = "#cwbt04 > div > span")
+    WebElement rightBracketButton;
+
     public void typeExpression(String expression) {
-        mainField.click();
-        mainField.sendKeys(expression);
+        answerField.click();
+        answerField.sendKeys(expression);
     }
 
     public void clickZeroButton() {
@@ -100,12 +114,32 @@ public class Calculator extends PageObject {
         plusButton.click();
     }
 
+    public void clickMinusButton() {
+        minusButton.click();
+    }
+
+    public void clickMultiplicationButton() {
+        multiplicationButton.click();
+    }
+
+    public void clickDivisionButton() {
+        divisionButton.click();
+    }
+
+    public void clickLeftBracketButton() {
+        leftBracketButton.click();
+    }
+
+    public void clickRightBracketButton() {
+        rightBracketButton.click();
+    }
+
     public void clickAnswerButton() {
         answerButton.click();
     }
 
     public String getAnswer() {
-        return mainField.getText();
+        return answerField.getText();
     }
 
 }

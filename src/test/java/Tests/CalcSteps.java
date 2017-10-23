@@ -22,76 +22,86 @@ public class CalcSteps {
         googleSearchPage.searchFor("calc");
     }
 
-    @When("I click 2 button")
-    public void whenIClick2Button() {
-        calculator.clickTwoButton();
-    }
-
-    @When("I click plus button")
-    public void whenIClickPlusButton() {
+    @When("click plus button")
+    public void whenClickPlusButton() {
         calculator.clickPlusButton();
     }
 
-    @When("I click answer button")
-    public void whenIClickAnswerButton() {
+    @When("click minus button")
+    public void whenClickMinusButton() {
+        calculator.clickMinusButton();
+    }
+
+    @When("click multiplication button")
+    public void whenClickMultiplicationButton() {
+        calculator.clickMultiplicationButton();
+    }
+
+    @When("click division button")
+    public void whenClickDivisionButton() {
+        calculator.clickDivisionButton();
+    }
+
+    @When("click answer button")
+    public void whenClickAnswerButton() {
         calculator.clickAnswerButton();
     }
 
-    @Then("The result should be 4")
-    public void thenTheResultShouldBe4() {
-        Assert.assertEquals("4", calculator.getAnswer());
+    @When("I click $num button")
+    public void whenIClicknumButton(String num) {
+        clickNumberButton(num);
     }
 
-    @When("I click <num1> button")
-    public void whenIClicknum1Button(@Named("num1") String num1) {
-        clickNumberButton(num1);
-    }
-
-    @When("I click <num2> button")
-    public void whenIClicknum2Button(@Named("num2") String num2) {
-        clickNumberButton(num2);
-    }
-
-    @Then("The result should be <result>")
-    public void thenTheResultShouldBeresult(@Named("result") String result) {
+    @Then("The result should be $result")
+    public void thenTheResultShouldBeresult(String result) {
         Assert.assertEquals(result, calculator.getAnswer());
     }
 
     public void clickNumberButton(String number) {
         char num[] = number.toCharArray();
-        switch (num[0]) {
-            case '0':
-                calculator.clickZeroButton();
-                break;
-            case '1':
-                calculator.clickOneButton();
-                break;
-            case '2':
-                calculator.clickTwoButton();
-                break;
-            case '3':
-                calculator.clickThreeButton();
-                break;
-            case '4':
-                calculator.clickFourButton();
-                break;
-            case '5':
-                calculator.clickFiveButton();
-                break;
-            case '6':
-                calculator.clickSixButton();
-                break;
-            case '7':
-                calculator.clickSevenButton();
-                break;
-            case '8':
-                calculator.clickEightButton();
-                break;
-            case '9':
-                calculator.clickNineButton();
-                break;
+        for (char symbol : num) {
+            switch (symbol) {
+                case '-':
+                    calculator.clickMinusButton();
+                    break;
+                case '0':
+                    calculator.clickZeroButton();
+                    break;
+                case '1':
+                    calculator.clickOneButton();
+                    break;
+                case '2':
+                    calculator.clickTwoButton();
+                    break;
+                case '3':
+                    calculator.clickThreeButton();
+                    break;
+                case '4':
+                    calculator.clickFourButton();
+                    break;
+                case '5':
+                    calculator.clickFiveButton();
+                    break;
+                case '6':
+                    calculator.clickSixButton();
+                    break;
+                case '7':
+                    calculator.clickSevenButton();
+                    break;
+                case '8':
+                    calculator.clickEightButton();
+                    break;
+                case '9':
+                    calculator.clickNineButton();
+                    break;
+                case '(':
+                    calculator.clickLeftBracketButton();
+                    break;
+                case ')':
+                    calculator.clickRightBracketButton();
+                    break;
+            }
         }
-
     }
 
 }
