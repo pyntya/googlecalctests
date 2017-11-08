@@ -1,74 +1,73 @@
 package PageObjects;
 
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.thucydides.core.pages.PageObject;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class Calculator extends PageObject {
 
-    public Calculator(WebDriver driver) {
-        super(driver);
-    }
-
     @FindBy(css = "#cwos")
-    WebElement answerField;
+    WebElementFacade answerField;
 
     @FindBy(css = "#cwbt43 > div > span")
-    WebElement zeroButton;
+    WebElementFacade zeroButton;
 
     @FindBy(css = "#cwbt33 > div > span")
-    WebElement oneButton;
+    WebElementFacade oneButton;
 
     @FindBy(css = "#cwbt34 > div > span")
-    WebElement twoButton;
+    WebElementFacade twoButton;
 
     @FindBy(css = "#cwbt35 > div > span")
-    WebElement threeButton;
+    WebElementFacade threeButton;
 
     @FindBy(css = "#cwbt23 > div > span")
-    WebElement fourButton;
+    WebElementFacade fourButton;
 
     @FindBy(css = "#cwbt24 > div > span")
-    WebElement fiveButton;
+    WebElementFacade fiveButton;
 
     @FindBy(css = "#cwbt25 > div > span")
-    WebElement sixButton;
+    WebElementFacade sixButton;
 
     @FindBy(css = "#cwbt13 > div > span")
-    WebElement sevenButton;
+    WebElementFacade sevenButton;
 
     @FindBy(css = "#cwbt14 > div > span")
-    WebElement eightButton;
+    WebElementFacade eightButton;
 
     @FindBy(css = "#cwbt15 > div > span")
-    WebElement nineButton;
+    WebElementFacade nineButton;
 
     @FindBy(css = "#cwbt45 > div > span")
-    WebElement answerButton;
+    WebElementFacade answerButton;
 
     @FindBy(css = "#cwbt46 > div > span")
-    WebElement plusButton;
+    WebElementFacade plusButton;
 
     @FindBy(css = "#cwbt36 > div > span")
-    WebElement minusButton;
+    WebElementFacade minusButton;
 
     @FindBy(css = "#cwbt26 > div > span")
-    WebElement multiplicationButton;
+    WebElementFacade multiplicationButton;
 
     @FindBy(css = "#cwbt16 > div > span")
-    WebElement divisionButton;
+    WebElementFacade divisionButton;
 
     @FindBy(css = "#cwbt03 > div > span")
-    WebElement leftBracketButton;
+    WebElementFacade leftBracketButton;
 
     @FindBy(css = "#cwbt04 > div > span")
-    WebElement rightBracketButton;
+    WebElementFacade rightBracketButton;
 
-    public void typeExpression(String expression) {
-        answerField.click();
-        answerField.sendKeys(expression);
-    }
+    @FindBy(id = "#cwmcwd")
+    WebElementFacade calc;
+
+    @FindBy(css = "#cwclrbtnAC")
+    WebElementFacade acButton;
+
+    @FindBy(css = "#cwbt44 > div > span")
+    WebElementFacade dotButton;
 
     public void clickZeroButton() {
         zeroButton.click();
@@ -138,8 +137,71 @@ public class Calculator extends PageObject {
         answerButton.click();
     }
 
+    public void clickDotButton() {
+        dotButton.click();
+    }
+
+    public void cleanAnswerField() {
+        clickAnswerButton();
+        acButton.click();
+    }
+
     public String getAnswer() {
         return answerField.getText();
     }
 
+    public void typeExpression(String expression) {
+        answerField.click();
+        answerField.sendKeys(expression);
+    }
+
+    public void clickNumberButton(String number) {
+        char num[] = number.toCharArray();
+        for (char symbol : num) {
+            switch (symbol) {
+                case '-':
+                    clickMinusButton();
+                    break;
+                case '.':
+                    clickDotButton();
+                    break;
+                case '0':
+                    clickZeroButton();
+                    break;
+                case '1':
+                    clickOneButton();
+                    break;
+                case '2':
+                    clickTwoButton();
+                    break;
+                case '3':
+                    clickThreeButton();
+                    break;
+                case '4':
+                    clickFourButton();
+                    break;
+                case '5':
+                    clickFiveButton();
+                    break;
+                case '6':
+                    clickSixButton();
+                    break;
+                case '7':
+                    clickSevenButton();
+                    break;
+                case '8':
+                    clickEightButton();
+                    break;
+                case '9':
+                    clickNineButton();
+                    break;
+                case '(':
+                    clickLeftBracketButton();
+                    break;
+                case ')':
+                    clickRightBracketButton();
+                    break;
+            }
+        }
+    }
 }

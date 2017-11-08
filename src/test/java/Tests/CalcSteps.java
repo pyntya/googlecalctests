@@ -5,21 +5,23 @@ import PageObjects.Calculator;
 import PageObjects.GoogleSearchPage;
 import org.jbehave.core.annotations.*;
 import org.junit.Assert;
+import org.junit.Ignore;
 
 
 public class CalcSteps {
 
-    Calculator calculator;
     GoogleSearchPage googleSearchPage;
+    Calculator calculator;
 
-    @Given("I have opened the google search page")
-    public void givenIHaveOpenedTheGoogleSearchPage() {
+    @BeforeStory
+    public void openGoogleSearchPage() {
         googleSearchPage.open();
+        googleSearchPage.searchFor("calc");
     }
 
-    @Given("Searched for the calc keyword")
-    public void givenSearchedForTheCalcKeyword() {
-        googleSearchPage.searchFor("calc");
+    @Given("I'm on google search page with opened calculator")
+    public void givenImOnGoogleSearchPageWithOpenedCalculator() {
+        googleSearchPage.getTitle().contains("calc");
     }
 
     @When("click plus button")
@@ -48,61 +50,24 @@ public class CalcSteps {
     }
 
     @When("I click $num button")
-    public void whenIClicknumButton(String num) {
-        clickNumberButton(num);
+    public void whenIClickNumButton(String num) {
+        calculator.clickNumberButton(num);
+    }
+
+    @When("I click <num1> <operator> <num2>")
+    public void whenIClickLeftNumberOperatorRightNumber(String num1, String operator,String num2) {
+        calculator.clickNumberButton(num1);
+        calculator.clickNumberButton(operator);
+        calculator.clickNumberButton(num2);
+
     }
 
     @Then("The result should be $result")
     public void thenTheResultShouldBeresult(String result) {
         Assert.assertEquals(result, calculator.getAnswer());
+        calculator.cleanAnswerField();
     }
 
-    public void clickNumberButton(String number) {
-        char num[] = number.toCharArray();
-        for (char symbol : num) {
-            switch (symbol) {
-                case '-':
-                    calculator.clickMinusButton();
-                    break;
-                case '0':
-                    calculator.clickZeroButton();
-                    break;
-                case '1':
-                    calculator.clickOneButton();
-                    break;
-                case '2':
-                    calculator.clickTwoButton();
-                    break;
-                case '3':
-                    calculator.clickThreeButton();
-                    break;
-                case '4':
-                    calculator.clickFourButton();
-                    break;
-                case '5':
-                    calculator.clickFiveButton();
-                    break;
-                case '6':
-                    calculator.clickSixButton();
-                    break;
-                case '7':
-                    calculator.clickSevenButton();
-                    break;
-                case '8':
-                    calculator.clickEightButton();
-                    break;
-                case '9':
-                    calculator.clickNineButton();
-                    break;
-                case '(':
-                    calculator.clickLeftBracketButton();
-                    break;
-                case ')':
-                    calculator.clickRightBracketButton();
-                    break;
-            }
-        }
-    }
 
 }
 
